@@ -159,9 +159,9 @@ var incrementEach = function(arrayOfNums) {
 	return newArray
 }
 
-var incrementEach = incrementEach( [ 2, 3, 4 ] )
-console.assert(   incrementEach[0] === 3  )
-console.assert(   incrementEach[2] === 5  )
+var incrementEachNum = incrementEach( [ 2, 3, 4 ] )
+console.assert(   incrementEachNum[0] === 3  )
+console.assert(   incrementEachNum[2] === 5  )
 
 // write a function called doubleAll(). 
 // it should take as input an array of numbers and return a new array 
@@ -226,32 +226,146 @@ console.assert(capitalizedArray[2] === "Pizza")
 
 var arrayToString = function(inputArray) {
 	var newString = ''
+	for (var i = 0; i < inputArray.length; i++) {
+    	var newString = newString + inputArray[i]
+    }
 	return newString
 } 
 
-// write a function called shortiesOnly(). taking as input an array of strings, it should return a new array containing only those strings with fewer than four characters. 
+console.assert(arrayToString(['pizza',4,'lunch']) === 'pizza4lunch')
 
-// write a function called reverseIt(). it should take as input a string or array (remember that we can often treat them the same way), and it should return a reversed version of that input. 
+// write a function called shortiesOnly(). 
+// taking as input an array of strings, 
+// it should return a new array containing only those strings with fewer than four characters.
 
-// write a function called getValue(). it should take two inputs: an object and a key. it should return the corresponding value for that key within the object. keep in mind that this should be a one-line function. no more than two. 
+var shortiesOnly = function(arrayOfStrings) {
+	var newArray = []
+    for(var i =0; i < arrayOfStrings.length; i++) {
+        var smallWord = arrayOfStrings[i]
+        if (smallWord.length < 4) {
+        newArray.push(smallWord)
+        }
+    }
+    return newArray
+}
 
-// write a function called getAllValues(). it should take as input an object, and it should return the values of all the keys in the object. 
+var shortStrings = shortiesOnly(['pizza','dog','baseball','bat'])
+console.assert(shortStrings[0] === 'dog')
+console.assert(shortStrings[1] === 'bat')
 
-// write a function called addProp(). It should take three inputs: an object, a property name, and a value. It should return the original object, plus a new key-value pair corresponding to the input.
+// ********************
+// write a function called reverseIt(). 
+// it should take as input a string or array 
+// (remember that we can often treat them the same way), 
+// and it should return a reversed version of that input. 
 
-// write a new version of addProp() that only takes two inputs: an object, and a second object containing a single key-value pair. this key-value pair should take the place of the second and third inputs in the above problem. e.g.:
+// var reverseIt = function(input) {
+// 	var newArray = []
+//     var newString = ''
+//     for(var i = input.length - 1; i >= 0; i--) {
+//             if (typeof input === 'string') {
+//             var char = input[i]
+//             newString = newString + char
+//         }
+//         if (typeof input === 'object') {
+//             var singleItem = input[i]
+//             newArray.push(singleItem)
+//             }
+//         return newArray
+// 	}
+//     return newString
+// }
+
+// console.assert(reverseIt('chocolate chip cookie') === 'eikooc pihc etalocohc')
+// var reversedArray = reverseIt([1,2,3,4,5]) // [5,4,3,2,1]
+// console.assert(reversedArray[0] === 5)
+// ********************
+
+
+// write a function called getValue(). 
+// it should take two inputs: an object and a key. 
+// it should return the corresponding value for that key within the object. 
+// keep in mind that this should be a one-line function. no more than two.
+
+var tacoObj = {
+    tortilla: 2,
+    cheese: 'queso'
+}
+
+var getValue = function(obj,key) {
+	return obj[key]
+}
+
+console.assert(getValue(tacoObj,'cheese') === 'queso')
+
+// write a function called getAllValues(). 
+// it should take as input an object, and it should return the values of all the keys in the object. 
+
+var tacoObj = {
+    tortilla: 2,
+    cheese: 'queso'
+}
+
+var getAllValues = function(obj) {
+ 	var allValues = []
+	for (var whateverProp in obj) {
+        var val = obj[whateverProp]
+        allValues.push(val)
+    }
+    return allValues
+}
+
+var result = (getAllValues(tacoObj))
+console.assert(result[0] === 2)
+
+// write a function called addProp(). 
+// It should take three inputs: an object, a property name, and a value. 
+// It should return the original object, plus a new key-value pair corresponding to the input.
+
+var tacoObj = {
+    tortilla: 2,
+    cheese: 'queso'
+}
+
+var addProp = function(obj,key,value) {
+    obj[key] = value
+    return obj
+}
+
+var newObj = addProp(tacoObj,'topping','guacamole')
+console.assert(newObj.topping === 'guacamole')
+
+// write a new version of addProp() that only takes two inputs: an object, and a second object 
+// containing a single key-value pair. this key-value pair should take the place of the second 
+// and third inputs in the above problem. e.g.:
 
 	// var usrObj = {name: 'linus odoyle', age:10, email:'odoylerules@yahoo.com'}
-
 	// var newObj = addProp(usrObj,{hometown:'new orleans'})
-	// newObj should look like this: 
+		// newObj should look like this: 
 	// {name: 'linus odoyle', age:10, email:'odoylerules@yahoo.com',hometown:'new orleans'}
-	// if i run:
-		// var newObj = addProp(newObj,{hobby:'bullying'})
+		// if i run:
+	// var newObj = addProp(newObj,{hobby:'bullying'})
 		// then newObj should contain even more data:
-		// {name: 'linus odoyle', age:10, email:'odoylerules@yahoo.com', hometown:'new orleans', hobby:'bullying'}
+	// {name: 'linus odoyle', age:10, email:'odoylerules@yahoo.com', hometown:'new orleans', hobby:'bullying'}
 
-// write a function called getKeys(). it should take as input an object, and it should return the names of all the keys (properties) of the object.
+var tacoObj = {
+    tortilla: 2,
+    cheese: 'queso'
+}
+
+var addProp = function(firstObj,objPair) {
+    for(var anyKey in objPair) {
+    	firstObj[anyKey] = objPair[anyKey]
+    }
+    return firstObj
+}
+
+var newObj = addProp(tacoObj,{salsa: 'pico'})
+console.assert(newObj.salsa === 'pico')
+
+// write a function called getKeys(). 
+// it should take as input an object, 
+// and it should return the names of all the keys (properties) of the object.
 
 // write a function called addPropAll(). it should take three inputs: an array of objects, a property name, and a value. it should return a new array of objects, where each object has been supplemented with the key-value pair from the input. 
 
